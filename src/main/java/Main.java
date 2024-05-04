@@ -34,6 +34,21 @@ public class Main {
             System.out.println("Sala No Encontrada");
         }
     }
+    public static void devolversala(){
+        String rutUsuario = solicitarRut();
+        Usuario usuario = buscarUsuarioPorRut(rutUsuario);
+        if (usuario == null) {
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+        int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
+        SalaEstudio sala = biblioteca.obtenerSalaPorID(ID);
+        if (sala != null){
+            biblioteca.DevolverSala(usuario ,sala);}
+        else {
+            System.out.println("Sala No Encontrada");
+        }
+    }
 
     public static void agregarUsuario() {
         String nombre = solicitarEntrada("Ingrese el nombre del usuario:");
