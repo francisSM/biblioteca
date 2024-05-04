@@ -34,11 +34,36 @@ public class Main {
     public static void agregarUsuario() {
         String nombre = solicitarEntrada("Ingrese el nombre del usuario:");
         String rut = solicitarRut();
-        String tipo = solicitarEntrada("Ingrese el tipo de usuario (Estudiante/Profesor/Personal de la Biblioteca):");
+        int tipoUsuario = solicitarTipoUsuario();
+        String tipo = switch (tipoUsuario) {
+            case 1 -> "Estudiante";
+            case 2 -> "Profesor";
+            case 3 -> "Personal de la Biblioteca";
+            default -> "Tipo de usuario no especificado";
+        };
         Usuario usuario = new Usuario(nombre, rut, tipo);
         biblioteca.agregarUsuario(usuario);
         System.out.println("Usuario agregado con éxito.");
     }
+
+    private static int solicitarTipoUsuario() {
+        int tipoUsuario;
+        while (true) {
+            try {
+                tipoUsuario = Integer.parseInt(solicitarEntrada("Seleccione el tipo de usuario:\n1. Estudiante\n2. Profesor\n3. Personal de la Biblioteca"));
+                if (tipoUsuario < 1 || tipoUsuario > 3) {
+                    throw new IllegalArgumentException("Opción inválida. Por favor, seleccione un número entre 1 y 3.");
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Opción inválida. Por favor, ingrese un número.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return tipoUsuario;
+    }
+
 
     public static void eliminarUsuario() {
         String rut = solicitarRut();
