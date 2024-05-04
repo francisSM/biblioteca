@@ -7,11 +7,31 @@ public class Biblioteca {
     private List<Libro> catalogo;
     private List<Usuario> usuarios;
     private Map<Usuario, List<Libro>> prestamos;
+    private List<SalaEstudio> salas;
 
     public Biblioteca() {
         this.catalogo = new ArrayList<>();
         this.usuarios = new ArrayList<>();
         this.prestamos = new HashMap<>();
+        this.salas = new ArrayList<>();
+    }
+    public void agregarSala(SalaEstudio Sala) {
+        salas.add(Sala);
+    }
+    public void eliminarSala(int ID) {
+        SalaEstudio salaAEliminar = null;
+        for (SalaEstudio sala : salas) {
+            if (sala.getNumero() == ID) {
+                salaAEliminar = sala;
+                break;
+            }
+        }
+        if (salaAEliminar != null) {
+            salas.remove(salaAEliminar);
+            System.out.println("Sala eliminada correctamente.");
+        } else {
+            System.out.println("No se encontró una sala con ese ID.");
+        }
     }
 
     public void agregarLibro(Libro libro) {
