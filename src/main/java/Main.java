@@ -28,7 +28,11 @@ public class Main {
         }
         int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
         SalaEstudio sala = biblioteca.obtenerSalaPorID(ID);
-        biblioteca.PrestarSala(usuario ,sala);
+        if (sala != null){
+        biblioteca.PrestarSala(usuario ,sala);}
+        else {
+            System.out.println("Sala No Encontrada");
+        }
     }
 
     public static void agregarUsuario() {
