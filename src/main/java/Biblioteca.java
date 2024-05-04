@@ -113,7 +113,6 @@ public class Biblioteca {
     public void DevolverSala(Usuario usuario, SalaEstudio sala) {
         if (!sala.isDisponible()) {
             sala.DevolverSala(usuario);
-            System.out.println("Sala devuelta correctamente");
         } else {
             System.out.println("La sala ya está disponible");
         }
