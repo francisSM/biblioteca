@@ -19,6 +19,17 @@ public class Main {
         int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala a eliminar:"));
         biblioteca.eliminarSala(ID);
     }
+    public static void Prestamosala(){
+        String rutUsuario = solicitarRut();
+        Usuario usuario = buscarUsuarioPorRut(rutUsuario);
+        if (usuario == null) {
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+        int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
+        SalaEstudio sala = biblioteca.obtenerSalaPorID(ID);
+        biblioteca.PrestarSala(usuario ,sala);
+    }
 
     public static void agregarUsuario() {
         String nombre = solicitarEntrada("Ingrese el nombre del usuario:");
