@@ -15,6 +15,16 @@ public class SalaEstudio {
         this.disponible = disponible;
         this.historialprestamo = new ArrayList<>();
     }
+
+    public static void Prestamo(Usuario usuario, SalaEstudio sala) {
+        sala.disponible = false;
+        sala.usuarioPrestado = usuario.getRut();
+        sala.agregarHistorial(usuario.getRut());
+    }
+    public void Prestamo(SalaEstudio sala) {
+
+    }
+
     public int getNumero() {
         return ID_Sala;
     }
@@ -29,24 +39,6 @@ public class SalaEstudio {
     }
     public void agregarHistorial(String rut) {
         historialprestamo.add(rut);
-    }
-
-    public void PrestarSala(Usuario usuario) {
-        Scanner scanner = new Scanner(System.in);
-        if (disponible) {
-            System.out.println("Ingrese el número de usuarios que ocuparán la sala");
-            int numUsuarios = scanner.nextInt();
-            if (numUsuarios <= capacidad) {
-                disponible = false;
-                usuarioPrestado = usuario.getRut();
-                agregarHistorial(usuario.getRut());
-                System.out.println("Sala prestada correctamente a: " + usuario.getNombre() + " (RUT: " + usuarioPrestado + ")");
-            } else {
-                System.out.println("Capacidad de la sala superada");
-            }
-        } else {
-            System.out.println("Sala no disponible");
-        }
     }
     public void DevolverSala() {
         if (!disponible) {
