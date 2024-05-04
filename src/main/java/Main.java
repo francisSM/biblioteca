@@ -52,7 +52,7 @@ public class Main {
 
     public static void agregarUsuario() {
         String nombre = solicitarEntrada("Ingrese el nombre del usuario:");
-        String rut = solicitarRut();
+        String rut = solicitarRutRegistro();
         int tipoUsuario = solicitarTipoUsuario();
         String tipo = switch (tipoUsuario) {
             case 1 -> "Estudiante";
@@ -191,6 +191,22 @@ public class Main {
     }
 
     private static String solicitarRut() {
+        String rut;
+        while (true) {
+            try {
+                rut = solicitarEntrada("Ingrese el RUT del usuario (sin puntos ni guión):");
+                if (!validarRut(rut)) {
+                    throw new IllegalArgumentException("El formato del RUT es inválido. Por favor, ingrese nuevamente.");
+                }
+
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return rut;
+    }
+    private static String solicitarRutRegistro() {
         String rut;
         while (true) {
             try {
