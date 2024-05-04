@@ -13,6 +13,7 @@ public class Main {
         boolean disponible= true;
         SalaEstudio sala = new SalaEstudio(ID, Capacidad, disponible);
         biblioteca.agregarSala(sala);
+        System.out.println("Sala agregada con éxito.");
     }
     public static void eliminarSala() {
         int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala a eliminar:"));
