@@ -33,12 +33,10 @@ public class MenuInteractivo {
 
                 if (opcionSeleccionada >= 1 && opcionSeleccionada <= OPCIONES.size()) {
                     List<Runnable> listaOpciones = new ArrayList<>(OPCIONES.values());
-                    if (opcionSeleccionada == OPCIONES.size() + 1) {
-                        salir = true;
-                    } else {
-                        Runnable opcion = listaOpciones.get(opcionSeleccionada - 1);
-                        opcion.run();
-                    }
+                    Runnable opcion = listaOpciones.get(opcionSeleccionada - 1);
+                    opcion.run();
+                } else if (opcionSeleccionada == OPCIONES.size() + 1) {
+                    salir = true;
                 } else {
                     System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
                 }
