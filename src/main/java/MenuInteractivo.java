@@ -11,6 +11,8 @@ public class MenuInteractivo {
         OPCIONES.put("Realizar préstamo", Main::realizarPrestamo);
         OPCIONES.put("Realizar devolución", Main::realizarDevolucion);
         OPCIONES.put("Mostrar información", Main::mostrarInformacion);
+        OPCIONES.put("Agregar sala", Main::agregarSala);
+        OPCIONES.put("Eliminar sala", Main::eliminarSala);
     }
 
     public static void mostrarMenu() {
