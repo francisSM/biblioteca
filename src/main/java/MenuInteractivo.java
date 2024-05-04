@@ -10,7 +10,7 @@ public class MenuInteractivo {
         OPCIONES.put("Eliminar libro", Main::eliminarLibro);
         OPCIONES.put("Realizar préstamo", Main::realizarPrestamo);
         OPCIONES.put("Realizar devolución", Main::realizarDevolucion);
-        OPCIONES.put("Mostrar información", Main::mostrarInformacion);
+        OPCIONES.put("Mostrar información de la Biblioteca", Main::mostrarInformacion);
         OPCIONES.put("Agregar sala", Main::agregarSala);
         OPCIONES.put("Eliminar sala", Main::eliminarSala);
         OPCIONES.put("Prestamo sala", Main::Prestamosala);
