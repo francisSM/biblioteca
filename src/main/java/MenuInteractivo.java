@@ -13,6 +13,7 @@ public class MenuInteractivo {
         OPCIONES.put("Mostrar información", Main::mostrarInformacion);
         OPCIONES.put("Agregar sala", Main::agregarSala);
         OPCIONES.put("Eliminar sala", Main::eliminarSala);
+        OPCIONES.put("Prestamo sala", Main::Prestamosala);
     }
 
     public static void mostrarMenu() {
