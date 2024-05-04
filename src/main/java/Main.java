@@ -9,7 +9,7 @@ public class Main {
     }
     public static void agregarSala() {
         int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
-        int Capacidad = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
+        int Capacidad = Integer.parseInt(solicitarEntrada("Ingrese la capacidad maxima de la sala:"));
         boolean disponible= true;
         SalaEstudio sala = new SalaEstudio(ID, Capacidad, disponible);
         biblioteca.agregarSala(sala);
