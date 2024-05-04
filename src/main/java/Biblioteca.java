@@ -97,19 +97,28 @@ public class Biblioteca {
     public Map<Usuario, List<Libro>> getPrestamos() {
         return prestamos;
     }
-       public void PrestarSala(Usuario usuario, SalaEstudio sala) {
+    public void PrestarSala(Usuario usuario, SalaEstudio sala) {
         Scanner scanner = new Scanner(System.in);
         if (sala.isDisponible()) {
             System.out.println("Ingrese el número de usuarios que ocuparán la sala");
             int numUsuarios = scanner.nextInt();
             if (numUsuarios <= sala.getCapacidad()) {
-                SalaEstudio.Prestamo(usuario ,sala);
+                sala.Prestamo(usuario);
                 System.out.println("Sala prestada correctamente a: " + usuario.getNombre());
             } else {
                 System.out.println("Capacidad de la sala superada");
             }
         } else {
             System.out.println("Sala no disponible");
+        }
+    }
+
+    public void DevolverSala(Usuario usuario, SalaEstudio sala) {
+        if (!sala.isDisponible()) {
+            sala.DevolverSala(usuario);
+            System.out.println("Sala devuelta correctamente");
+        } else {
+            System.out.println("La sala ya está disponible");
         }
     }
     public SalaEstudio obtenerSalaPorID(int ID) {
