@@ -7,6 +7,17 @@ public class Main {
     public static void main(String[] args) {
         MenuInteractivo.mostrarMenu();
     }
+    public static void agregarSala() {
+        int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
+        int Capacidad = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala:"));
+        boolean disponible= true;
+        SalaEstudio sala = new SalaEstudio(ID, Capacidad, disponible);
+        biblioteca.agregarSala(sala);
+    }
+    public static void eliminarSala() {
+        int ID = Integer.parseInt(solicitarEntrada("Ingrese el ID de la sala a eliminar:"));
+        biblioteca.eliminarSala(ID);
+    }
 
     public static void agregarUsuario() {
         String nombre = solicitarEntrada("Ingrese el nombre del usuario:");
