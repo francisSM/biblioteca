@@ -40,8 +40,9 @@ public class SalaEstudio {
         if (usuario.getRut().equals(usuarioPrestado)) {
             disponible = true;
             usuarioPrestado = null;
+            System.out.println("Sala devuelta correctamente");
         } else {
-            System.out.println("No puedes devolver la sala, no la has prestado.");
+            System.out.println("No puedes devolver la sala, tu no has solicitado el prestamo.");
         }
     }
 }
