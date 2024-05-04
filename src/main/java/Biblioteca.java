@@ -97,5 +97,28 @@ public class Biblioteca {
     public Map<Usuario, List<Libro>> getPrestamos() {
         return prestamos;
     }
+       public void PrestarSala(Usuario usuario, SalaEstudio sala) {
+        Scanner scanner = new Scanner(System.in);
+        if (sala.isDisponible()) {
+            System.out.println("Ingrese el número de usuarios que ocuparán la sala");
+            int numUsuarios = scanner.nextInt();
+            if (numUsuarios <= sala.getCapacidad()) {
+                SalaEstudio.Prestamo(usuario ,sala);
+                System.out.println("Sala prestada correctamente a: " + usuario.getNombre());
+            } else {
+                System.out.println("Capacidad de la sala superada");
+            }
+        } else {
+            System.out.println("Sala no disponible");
+        }
+    }
+    public SalaEstudio obtenerSalaPorID(int ID) {
+        for (SalaEstudio sala : salas) {
+            if (sala.getNumero() == ID) {
+                return sala;
+            }
+        }
+        return null;
+    }
 
 }
