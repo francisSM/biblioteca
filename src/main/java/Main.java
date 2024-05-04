@@ -154,6 +154,9 @@ public class Main {
                 if (!validarRut(rut)) {
                     throw new IllegalArgumentException("El formato del RUT es inválido. Por favor, ingrese nuevamente.");
                 }
+                if (existeUsuarioConRut(rut)) {
+                    throw new IllegalArgumentException("El RUT ingresado ya está registrado. Por favor, ingrese otro RUT.");
+                }
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -161,6 +164,16 @@ public class Main {
         }
         return rut;
     }
+
+    private static boolean existeUsuarioConRut(String rut) {
+        for (Usuario usuario : biblioteca.getUsuarios()) {
+            if (usuario.getRut().equals(rut)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private static boolean validarRut(String rut) {
         String rutRegex = "\\d{8}[0-9kK]";
