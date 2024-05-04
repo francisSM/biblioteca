@@ -152,7 +152,11 @@ public class Main {
     }
 
     private static boolean validarRut(String rut) {
-        return rut.matches("\\d{9}"); // es simple, solo verifica que sean 9 dígitos
+        String rutRegex = "\\d{8}[0-9kK]";
+        if (rut.toLowerCase().endsWith("k")) {
+            rut = rut.substring(0, rut.length() - 1) + "0";
+        }
+        return rut.matches(rutRegex);
     }
 
     private static String solicitarEntrada(String mensaje) {
