@@ -140,14 +140,19 @@ public class Main {
         biblioteca.actualizarUsuario(buscarUsuarioPorRut(rutUsuario));
     }
 
-    public static void agregarLibro() {
+   public static void agregarLibro() {
         String titulo = solicitarEntrada("Ingrese el título del libro:");
         String autor = solicitarEntrada("Ingrese el autor del libro:");
         String categoria = solicitarEntrada("Ingrese la categoría del libro:");
-        int ejemplaresDisponibles = Integer.parseInt(solicitarEntrada("Ingrese la cantidad de ejemplares disponibles del libro:"));
-        Libro libro = new Libro(titulo, autor, categoria, ejemplaresDisponibles);
-        biblioteca.agregarLibro(libro);
-        System.out.println("Libro agregado con éxito.");
+        int ejemplaresDisponibles;
+        try {
+            ejemplaresDisponibles = Integer.parseInt(solicitarEntrada("Ingrese la cantidad de ejemplares disponibles del libro:"));
+            Libro libro = new Libro(titulo, autor, categoria, ejemplaresDisponibles);
+            biblioteca.agregarLibro(libro);
+            System.out.println("Libro agregado con éxito.");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: La cantidad de ejemplares debe ser un número entero.");
+        }
     }
 
     public static void eliminarLibro() {
