@@ -110,6 +110,10 @@ public class Biblioteca {
         return usuarios;
     }
 
+    public List<SalaEstudio> getSalas() {
+        return salas;
+    }
+
     public Map<Usuario, List<Libro>> getPrestamos() {
         return prestamos;
     }
