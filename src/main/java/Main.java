@@ -94,6 +94,10 @@ public class Main {
             System.out.println("Usuario no encontrado.");
         }
     }
+    public static void editarusuario(){
+        String rutUsuario = solicitarRut();
+        biblioteca.actualizarUsuario(buscarUsuarioPorRut(rutUsuario));
+    }
 
     public static void agregarLibro() {
         String titulo = solicitarEntrada("Ingrese el título del libro:");
