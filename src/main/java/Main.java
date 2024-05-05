@@ -223,24 +223,69 @@ public class Main {
     }
 
     public static void mostrarInformacion() {
-        System.out.println("------ Información ------");
-        System.out.println("Libros en el catálogo:");
-        for (Libro libro : biblioteca.getCatalogo()) {
-            System.out.println(libro);
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.println("¿Qué información desea ver?");
+            System.out.println("1. Información de usuarios");
+            System.out.println("2. Información de libros");
+            System.out.println("3. Información de salas");
+            System.out.print("Ingrese su elección (1/2/3): ");
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    if (biblioteca.getUsuarios().isEmpty()) {
+                        System.out.println("No hay información registrada de usuarios.");
+                    } else {
+                        mostrarInformacionUsuarios();
+                    }
+                    break;
+                case 2:
+                    if (biblioteca.getCatalogo().isEmpty()) {
+                        System.out.println("No hay información registrada de libros.");
+                    } else {
+                        mostrarInformacionLibros();
+                    }
+                    break;
+                case 3:
+                    if (biblioteca.getSalas().isEmpty()) {
+                        System.out.println("No hay información registrada de salas.");
+                    } else {
+                        mostrarInformacionSalas();
+                    }
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Ingrese un número válido.");
         }
-        System.out.println("\nUsuarios registrados:");
+    }
+
+
+    private static void mostrarInformacionUsuarios() {
+        System.out.println("------ Información de Usuarios ------");
         for (Usuario usuario : biblioteca.getUsuarios()) {
             System.out.println(usuario);
         }
-        System.out.println("\nPréstamos registrados:");
-        for (Map.Entry<Usuario, List<Libro>> entry : biblioteca.getPrestamos().entrySet()) {
-            Usuario usuario = entry.getKey();
-            List<Libro> librosPrestados = entry.getValue();
-            System.out.println("Usuario: " + usuario.getNombre());
-            System.out.println("Libros prestados:");
-            for (Libro libro : librosPrestados) {
-                System.out.println("- " + libro.getTitulo());
-            }
+    }
+
+    private static void mostrarInformacionLibros() {
+        System.out.println("------ Información de Libros ------");
+        for (Libro libro : biblioteca.getCatalogo()) {
+            System.out.println(libro);
+        }
+    }
+
+    private static void mostrarInformacionSalas() {
+        System.out.println("------ Información de Salas ------");
+        for (SalaEstudio sala : biblioteca.getSalas()) {
+            System.out.println("ID: " + sala.getNumero());
+            System.out.println("Capacidad: " + sala.getCapacidad());
+            System.out.println("Disponible: " + (sala.isDisponible() ? "Sí" : "No"));
+            System.out.println("Usuario prestado: " + (sala.isDisponible() ? "N/A" : sala.getUsuarioPrestado()));
+            System.out.println();
         }
     }
 
