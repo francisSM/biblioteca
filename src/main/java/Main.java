@@ -160,11 +160,25 @@ public class Main {
         String titulo = solicitarEntrada("Ingrese el título del libro que desea eliminar:");
         Libro libro = buscarLibroPorTitulo(titulo);
         if (libro != null) {
-            biblioteca.eliminarLibro(libro);
-            System.out.println("Libro eliminado con éxito.");
+            if (libroPrestado(libro)) {
+                System.out.println("No se puede eliminar el libro porque está reservado actualmente.");
+            } else {
+                biblioteca.eliminarLibro(libro);
+                System.out.println("Libro eliminado con éxito.");
+            }
         } else {
             System.out.println("Libro no encontrado.");
         }
+    }
+
+    private static boolean libroPrestado(Libro libro) {
+        Map<Usuario, List<Libro>> prestamos = biblioteca.getPrestamos();
+        for (List<Libro> librosPrestados : prestamos.values()) {
+            if (librosPrestados.contains(libro)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int solicitarCantidadEjemplares() {
