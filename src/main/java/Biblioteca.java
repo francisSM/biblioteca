@@ -5,12 +5,16 @@ public class Biblioteca {
     private List<Usuario> usuarios;
     private Map<Usuario, List<Libro>> prestamos;
     private List<SalaEstudio> salas;
+    private List<Map.Entry<Usuario, Libro>> historialPrestamos;
+
 
     public Biblioteca() {
         this.catalogo = new ArrayList<>();
         this.usuarios = new ArrayList<>();
         this.prestamos = new HashMap<>();
         this.salas = new ArrayList<>();
+        this.historialPrestamos = new ArrayList<>();
+
     }
     public void agregarSala(SalaEstudio Sala) {
         salas.add(Sala);
@@ -91,6 +95,11 @@ public class Biblioteca {
             prestamos.put(usuario, prestamosUsuario);
         }
         libro.prestamoRealizado();
+        historialPrestamos.add(new AbstractMap.SimpleEntry<>(usuario, libro));
+    }
+
+    public List<Map.Entry<Usuario, Libro>> getHistorialPrestamos() {
+        return historialPrestamos;
     }
 
     public void realizarDevolucion(Usuario usuario, Libro libro) {

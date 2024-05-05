@@ -25,7 +25,12 @@ public class MenuInteractivo {
         gestionPrestamosSala.put("Devolver sala", Main::devolversala);
         OPCIONES.put("Gestionar préstamos sala", gestionPrestamosSala);
 
-        OPCIONES.put("Mostrar información de la Biblioteca", Collections.singletonMap("Mostrar información", Main::mostrarInformacion));
+        Map<String, Runnable> mostrarInformacion = new LinkedHashMap<>();
+        mostrarInformacion.put("Información de usuarios", Main::mostrarInformacionUsuarios);
+        mostrarInformacion.put("Información de libros", Main::mostrarInformacionLibros);
+        mostrarInformacion.put("Información de salas", Main::mostrarInformacionSalas);
+        mostrarInformacion.put("Historial de préstamos de libros", Main::mostrarHistorialPrestamosLibros);
+        OPCIONES.put("Mostrar información", mostrarInformacion);
     }
 
     public static void mostrarMenu() {
@@ -33,7 +38,7 @@ public class MenuInteractivo {
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("------ Menú ------");
+            System.out.println("Menú");
             int i = 1;
             for (String categoria : OPCIONES.keySet()) {
                 System.out.println(i + ". " + categoria);
@@ -52,7 +57,7 @@ public class MenuInteractivo {
 
                     boolean salirCategoria = false;
                     while (!salirCategoria) {
-                        System.out.println("------ " + OPCIONES.keySet().toArray()[opcionCategoria - 1] + " ------");
+                        System.out.println(OPCIONES.keySet().toArray()[opcionCategoria - 1]);
                         int j = 1;
                         for (String opcion : categoriaSeleccionada.keySet()) {
                             System.out.println(j + ". " + opcion);

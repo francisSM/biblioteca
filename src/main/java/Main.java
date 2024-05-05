@@ -228,72 +228,58 @@ public class Main {
         System.out.println("Devolución realizada con éxito.");
     }
 
-    public static void mostrarInformacion() {
-        Scanner scanner = new Scanner(System.in);
-
-        try {
-            System.out.println("¿Qué información desea ver?");
-            System.out.println("1. Información de usuarios");
-            System.out.println("2. Información de libros");
-            System.out.println("3. Información de salas");
-            System.out.print("Ingrese su elección (1/2/3): ");
-            int opcion = scanner.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    if (biblioteca.getUsuarios().isEmpty()) {
-                        System.out.println("No hay información registrada de usuarios.");
-                    } else {
-                        mostrarInformacionUsuarios();
-                    }
-                    break;
-                case 2:
-                    if (biblioteca.getCatalogo().isEmpty()) {
-                        System.out.println("No hay información registrada de libros.");
-                    } else {
-                        mostrarInformacionLibros();
-                    }
-                    break;
-                case 3:
-                    if (biblioteca.getSalas().isEmpty()) {
-                        System.out.println("No hay información registrada de salas.");
-                    } else {
-                        mostrarInformacionSalas();
-                    }
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
+    public static void mostrarHistorialPrestamosLibros() {
+        List<Map.Entry<Usuario, Libro>> historial = biblioteca.getHistorialPrestamos();
+        if (historial == null || historial.isEmpty()) {
+            System.out.println("No hay historial de préstamos de libros.");
+        } else {
+            System.out.println("Historial de Préstamos de Libros");
+            for (Map.Entry<Usuario, Libro> entry : historial) {
+                System.out.println("Usuario: " + entry.getKey().getNombre() + " - Libro: " + entry.getValue().getTitulo());
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Error: Ingrese un número válido.");
         }
     }
 
-
-    private static void mostrarInformacionUsuarios() {
-        System.out.println("------ Información de Usuarios ------");
-        for (Usuario usuario : biblioteca.getUsuarios()) {
-            System.out.println(usuario);
+    public static void mostrarInformacionUsuarios() {
+        List<Usuario> usuarios = biblioteca.getUsuarios();
+        if (usuarios == null || usuarios.isEmpty()) {
+            System.out.println("No hay información registrada de usuarios.");
+        } else {
+            System.out.println("Información de Usuarios");
+            for (Usuario usuario : usuarios) {
+                System.out.println(usuario);
+            }
         }
     }
 
-    private static void mostrarInformacionLibros() {
-        System.out.println("------ Información de Libros ------");
-        for (Libro libro : biblioteca.getCatalogo()) {
-            System.out.println(libro);
+    public static void mostrarInformacionLibros() {
+        List<Libro> libros = biblioteca.getCatalogo();
+        if (libros == null || libros.isEmpty()) {
+            System.out.println("No hay información registrada de libros.");
+        } else {
+            System.out.println("Información de Libros");
+            for (Libro libro : libros) {
+                System.out.println(libro);
+            }
         }
     }
 
-    private static void mostrarInformacionSalas() {
-        System.out.println("------ Información de Salas ------");
-        for (SalaEstudio sala : biblioteca.getSalas()) {
-            System.out.println("ID: " + sala.getNumero());
-            System.out.println("Capacidad: " + sala.getCapacidad());
-            System.out.println("Disponible: " + (sala.isDisponible() ? "Sí" : "No"));
-            System.out.println("Usuario prestado: " + (sala.isDisponible() ? "N/A" : sala.getUsuarioPrestado()));
-            System.out.println();
+    public static void mostrarInformacionSalas() {
+        List<SalaEstudio> salas = biblioteca.getSalas();
+        if (salas == null || salas.isEmpty()) {
+            System.out.println("No hay información registrada de salas.");
+        } else {
+            System.out.println("Información de Salas");
+            for (SalaEstudio sala : salas) {
+                System.out.println("ID: " + sala.getNumero());
+                System.out.println("Capacidad: " + sala.getCapacidad());
+                System.out.println("Disponible: " + (sala.isDisponible() ? "Sí" : "No"));
+                System.out.println("Usuario prestado: " + (sala.isDisponible() ? "N/A" : sala.getUsuarioPrestado()));
+                System.out.println();
+            }
         }
     }
+
 
     private static Usuario buscarUsuarioPorRut(String rut) {
         for (Usuario u : biblioteca.getUsuarios()) {
