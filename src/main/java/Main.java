@@ -60,9 +60,50 @@ public class Main {
             case 3 -> "Personal de la Biblioteca";
             default -> "Tipo de usuario no especificado";
         };
-        Usuario usuario = new Usuario(nombre, rut, tipo);
-        biblioteca.agregarUsuario(usuario);
-        System.out.println("Usuario agregado con éxito.");
+
+        // Solicitar confirmación al usuario
+        boolean confirmado = confirmarDatos(nombre, rut, tipo);
+
+        if (confirmado) {
+            Usuario usuario = new Usuario(nombre, rut, tipo);
+            biblioteca.agregarUsuario(usuario);
+            System.out.println("Usuario agregado con éxito.");
+        } else {
+            System.out.println("Registro de usuario cancelado. No se han realizado cambios.");
+        }
+    }
+
+
+    private static boolean confirmarDatos(String nombre, String rut, String tipo) {
+        System.out.println("Datos ingresados:");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("RUT: " + rut);
+        System.out.println("Tipo de usuario: " + tipo);
+
+        Scanner scanner = new Scanner(System.in);
+        int respuesta;
+
+        while (true) {
+            try {
+                System.out.println("¿Desea confirmar los datos ingresados?");
+                System.out.println("1. Sí");
+                System.out.println("2. No");
+                System.out.print("Ingrese su respuesta (1/2): ");
+                respuesta = Integer.parseInt(scanner.nextLine());
+
+                if (respuesta != 1 && respuesta != 2) {
+                    throw new IllegalArgumentException("Respuesta inválida. Por favor, ingrese 1 o 2.");
+                }
+
+                break; // Salir del bucle si la respuesta es válida
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Respuesta no válida. Ingrese un número (1 o 2).");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return respuesta == 1;
     }
 
     private static int solicitarTipoUsuario() {
