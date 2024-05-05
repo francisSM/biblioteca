@@ -95,7 +95,7 @@ public class Main {
                     throw new IllegalArgumentException("Respuesta inválida. Por favor, ingrese 1 o 2.");
                 }
 
-                break; // Salir del bucle si la respuesta es válida
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Error: Respuesta no válida. Ingrese un número (1 o 2).");
             } catch (IllegalArgumentException e) {
