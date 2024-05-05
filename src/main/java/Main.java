@@ -235,10 +235,11 @@ public class Main {
         } else {
             System.out.println("Historial de Préstamos de Libros");
             for (Map.Entry<Usuario, Libro> entry : historial) {
-                System.out.println("Usuario: " + entry.getKey().getNombre() + " - Libro: " + entry.getValue().getTitulo());
+                System.out.println("Usuario: " + entry.getKey().getRut() + " - Libro: " + entry.getValue().getTitulo());
             }
         }
     }
+
 
     public static void mostrarInformacionUsuarios() {
         List<Usuario> usuarios = biblioteca.getUsuarios();
