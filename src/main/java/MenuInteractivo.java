@@ -1,21 +1,31 @@
 import java.util.*;
 
 public class MenuInteractivo {
-    private static final Map<String, Runnable> OPCIONES = new LinkedHashMap<>();
+    private static final Map<String, Map<String, Runnable>> OPCIONES = new LinkedHashMap<>();
 
     static {
-        OPCIONES.put("Agregar usuario", Main::agregarUsuario);
-        OPCIONES.put("Eliminar usuario", Main::eliminarUsuario);
-        OPCIONES.put("Modificar usuario", Main::editarusuario);
-        OPCIONES.put("Agregar libro", Main::agregarLibro);
-        OPCIONES.put("Eliminar libro", Main::eliminarLibro);
-        OPCIONES.put("Realizar préstamo", Main::realizarPrestamo);
-        OPCIONES.put("Realizar devolución", Main::realizarDevolucion);
-        OPCIONES.put("Mostrar información de la Biblioteca", Main::mostrarInformacion);
-        OPCIONES.put("Agregar sala", Main::agregarSala);
-        OPCIONES.put("Eliminar sala", Main::eliminarSala);
-        OPCIONES.put("Prestamo sala", Main::Prestamosala);
-        OPCIONES.put("Devolver sala", Main::devolversala);
+        Map<String, Runnable> gestionUsuarios = new LinkedHashMap<>();
+        gestionUsuarios.put("Agregar usuario", Main::agregarUsuario);
+        gestionUsuarios.put("Eliminar usuario", Main::eliminarUsuario);
+        gestionUsuarios.put("Modificar usuario", Main::editarusuario);
+        OPCIONES.put("Gestionar usuarios", gestionUsuarios);
+
+        Map<String, Runnable> gestionLibros = new LinkedHashMap<>();
+        gestionLibros.put("Agregar libro", Main::agregarLibro);
+        gestionLibros.put("Eliminar libro", Main::eliminarLibro);
+        OPCIONES.put("Gestionar libros", gestionLibros);
+
+        Map<String, Runnable> gestionPrestamosLibros = new LinkedHashMap<>();
+        gestionPrestamosLibros.put("Realizar préstamo", Main::realizarPrestamo);
+        gestionPrestamosLibros.put("Realizar devolución", Main::realizarDevolucion);
+        OPCIONES.put("Gestionar préstamos libros", gestionPrestamosLibros);
+
+        Map<String, Runnable> gestionPrestamosSala = new LinkedHashMap<>();
+        gestionPrestamosSala.put("Prestamo sala", Main::Prestamosala);
+        gestionPrestamosSala.put("Devolver sala", Main::devolversala);
+        OPCIONES.put("Gestionar préstamos sala", gestionPrestamosSala);
+
+        OPCIONES.put("Mostrar información de la Biblioteca", Collections.singletonMap("Mostrar información", Main::mostrarInformacion));
     }
 
     public static void mostrarMenu() {
@@ -25,23 +35,47 @@ public class MenuInteractivo {
         while (!salir) {
             System.out.println("------ Menú ------");
             int i = 1;
-            for (String opcion : OPCIONES.keySet()) {
-                System.out.println(i + ". " + opcion);
+            for (String categoria : OPCIONES.keySet()) {
+                System.out.println(i + ". " + categoria);
                 i++;
             }
             System.out.println(i + ". Salir");
             System.out.println("Seleccione una opción: ");
 
             try {
-                int opcionSeleccionada = scanner.nextInt();
+                int opcionCategoria = scanner.nextInt();
                 scanner.nextLine();
 
-                if (opcionSeleccionada >= 1 && opcionSeleccionada <= OPCIONES.size()) {
-                    List<Runnable> listaOpciones = new ArrayList<>(OPCIONES.values());
-                    Runnable opcion = listaOpciones.get(opcionSeleccionada - 1);
-                    opcion.run();
-                } else if (opcionSeleccionada == OPCIONES.size() + 1) {
-                    salir = true; // arreglado
+                if (opcionCategoria >= 1 && opcionCategoria <= OPCIONES.size()) {
+                    List<Map<String, Runnable>> listaCategorias = new ArrayList<>(OPCIONES.values());
+                    Map<String, Runnable> categoriaSeleccionada = listaCategorias.get(opcionCategoria - 1);
+
+                    boolean salirCategoria = false;
+                    while (!salirCategoria) {
+                        System.out.println("------ " + OPCIONES.keySet().toArray()[opcionCategoria - 1] + " ------");
+                        int j = 1;
+                        for (String opcion : categoriaSeleccionada.keySet()) {
+                            System.out.println(j + ". " + opcion);
+                            j++;
+                        }
+                        System.out.println(j + ". Volver");
+                        System.out.println("Seleccione una opción: ");
+
+                        int opcionSeleccionada = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (opcionSeleccionada >= 1 && opcionSeleccionada <= categoriaSeleccionada.size()) {
+                            List<Runnable> listaOpciones = new ArrayList<>(categoriaSeleccionada.values());
+                            Runnable opcion = listaOpciones.get(opcionSeleccionada - 1);
+                            opcion.run();
+                        } else if (opcionSeleccionada == categoriaSeleccionada.size() + 1) {
+                            salirCategoria = true;
+                        } else {
+                            System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                        }
+                    }
+                } else if (opcionCategoria == OPCIONES.size() + 1) {
+                    salir = true;
                 } else {
                     System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
                 }
