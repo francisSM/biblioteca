@@ -7,7 +7,6 @@ public class Usuario {
     private String tipo; // Estudiante, Profesor, Personal de la Biblioteca
     private List<Libro> historialPrestamos;
     private List<Libro> librosReservados;
-    private List<Integer> calificaciones;
 
     public Usuario(String nombre, String rut, String tipo) {
         this.nombre = nombre;
@@ -15,7 +14,6 @@ public class Usuario {
         this.tipo = tipo;
         this.historialPrestamos = new ArrayList<>();
         this.librosReservados = new ArrayList<>();
-        this.calificaciones = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -38,9 +36,6 @@ public class Usuario {
         return librosReservados;
     }
 
-    public List<Integer> getCalificaciones() {
-        return calificaciones;
-    }
 
     public void agregarPrestamo(Libro libro) {
         historialPrestamos.add(libro);
@@ -48,10 +43,6 @@ public class Usuario {
 
     public void realizarReserva(Libro libro) {
         librosReservados.add(libro);
-    }
-
-    public void agregarCalificacion(int calificacion) {
-        calificaciones.add(calificacion);
     }
 
     @Override
@@ -62,7 +53,6 @@ public class Usuario {
                 ", tipo='" + tipo + '\'' +
                 ", historialPrestamos=" + historialPrestamos +
                 ", librosReservados=" + librosReservados +
-                ", calificaciones=" + calificaciones +
                 '}';
     }
 
