@@ -5,6 +5,12 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        SalaEstudio salaEstudio = new SalaEstudio(1,5,true);
+        biblioteca.agregarSala(salaEstudio);
+        Libro libro = new Libro("Test", "Test", "Test", 5);
+        biblioteca.agregarLibro(libro);
+        Usuario usuario = new Usuario("Pedro", "208181203", "Estudiante");
+        biblioteca.agregarUsuario(usuario);
         MenuInteractivo.mostrarMenu();
     }
     public static void agregarSala() {
@@ -375,6 +381,8 @@ public class Main {
     }
 
     private static boolean validarPrestamo(Usuario usuario, Libro libro) {
-        return libro.getEjemplaresDisponibles() > 0 && !biblioteca.getPrestamos().get(usuario).contains(libro);
+        List<Libro> prestamosUsuario = biblioteca.getPrestamos().getOrDefault(usuario, new ArrayList<>());
+        boolean libroDisponible = biblioteca.getCatalogo().contains(libro);
+        return !prestamosUsuario.contains(libro) && libroDisponible && libro.getEjemplaresDisponibles() > 0;
     }
 }
