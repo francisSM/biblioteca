@@ -140,19 +140,14 @@ public class Main {
         biblioteca.actualizarUsuario(buscarUsuarioPorRut(rutUsuario));
     }
 
-   public static void agregarLibro() {
+    public static void agregarLibro() {
         String titulo = solicitarEntrada("Ingrese el título del libro:");
         String autor = solicitarEntrada("Ingrese el autor del libro:");
         String categoria = solicitarEntrada("Ingrese la categoría del libro:");
-        int ejemplaresDisponibles;
-        try {
-            ejemplaresDisponibles = Integer.parseInt(solicitarEntrada("Ingrese la cantidad de ejemplares disponibles del libro:"));
-            Libro libro = new Libro(titulo, autor, categoria, ejemplaresDisponibles);
-            biblioteca.agregarLibro(libro);
-            System.out.println("Libro agregado con éxito.");
-        } catch (NumberFormatException e) {
-            System.out.println("Error: La cantidad de ejemplares debe ser un número entero.");
-        }
+        int ejemplaresDisponibles = solicitarCantidadEjemplares();
+        Libro libro = new Libro(titulo, autor, categoria, ejemplaresDisponibles);
+        biblioteca.agregarLibro(libro);
+        System.out.println("Libro agregado con éxito.");
     }
 
     public static void eliminarLibro() {
@@ -164,6 +159,24 @@ public class Main {
         } else {
             System.out.println("Libro no encontrado.");
         }
+    }
+
+    public static int solicitarCantidadEjemplares() {
+        int ejemplares = 0;
+        while (true) {
+            try {
+                ejemplares = Integer.parseInt(solicitarEntrada("Ingrese la cantidad de ejemplares disponibles del libro:"));
+                if (ejemplares <= 0) {
+                    throw new IllegalArgumentException("La cantidad de ejemplares debe ser mayor a cero.");
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return ejemplares;
     }
 
     public static void realizarPrestamo() {
