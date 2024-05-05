@@ -6,6 +6,7 @@ public class MenuInteractivo {
     static {
         OPCIONES.put("Agregar usuario", Main::agregarUsuario);
         OPCIONES.put("Eliminar usuario", Main::eliminarUsuario);
+        OPCIONES.put("Modificar usuario", Main::editarusuario);
         OPCIONES.put("Agregar libro", Main::agregarLibro);
         OPCIONES.put("Eliminar libro", Main::eliminarLibro);
         OPCIONES.put("Realizar préstamo", Main::realizarPrestamo);
