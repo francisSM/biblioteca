@@ -57,8 +57,27 @@ public class Biblioteca {
         prestamos.remove(usuario);
     }
 
-    public void actualizarUsuario(Usuario usuario) {
-        System.out.println("falta lógica");
+   public void actualizarUsuario(Usuario usuario) {
+        Scanner scanner = new Scanner(System.in);
+        if (usuario != null) {
+            System.out.println("Nombre Usuario: "+ usuario.getNombre()+"\nUsuario Registrado Actualmente como: " +usuario.getTipo());
+            System.out.println("Seleccione el nuevo Rol del usuario:\n1. Estudiante\n2. Profesor\n3. Personal de la Biblioteca");
+            int tipoUsuario = scanner.nextInt();
+            String tipo = switch (tipoUsuario) {
+                case 1 -> "Estudiante";
+                case 2 -> "Profesor";
+                case 3 -> "Personal de la Biblioteca";
+                default -> "Tipo de usuario no especificado";
+            };
+            if (tipoUsuario >= 1 && tipoUsuario <= 3){
+            usuario.setTipo(tipo);
+            System.out.println("Tipo de usuario actualizado correctamente.");}
+            else {
+                System.out.println("Tipo de Usuario Invalido");
+            }
+        } else {
+            System.out.println("Usuario no encontrado.");
+        }
     }
 
     public void realizarPrestamo(Usuario usuario, Libro libro) {
