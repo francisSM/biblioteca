@@ -21,8 +21,10 @@ public class MenuInteractivo {
         OPCIONES.put("Gestionar préstamos libros", gestionPrestamosLibros);
 
         Map<String, Runnable> gestionPrestamosSala = new LinkedHashMap<>();
-        gestionPrestamosSala.put("Prestamo sala", Main::Prestamosala);
-        gestionPrestamosSala.put("Devolver sala", Main::devolversala);
+        gestionPrestamosSala.put("Agregar Sala", Main::agregarSala);
+        gestionPrestamosSala.put("Eliminar Sala", Main::eliminarSala);
+        gestionPrestamosSala.put("Prestamo sala", Main::prestamoSala);
+        gestionPrestamosSala.put("Devolver sala", Main::devolverSala);
         OPCIONES.put("Gestionar préstamos sala", gestionPrestamosSala);
 
         Map<String, Runnable> mostrarInformacion = new LinkedHashMap<>();
