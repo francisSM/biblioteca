@@ -38,10 +38,21 @@ public class Administrador {
     public void realizarDevolucion(Usuario usuario, Libro libro) {
         biblioteca.realizarDevolucion(usuario, libro);
     }
+    
     public void agregarSala(SalaEstudio salaEstudio){
         biblioteca.agregarSala(salaEstudio);
     }
+    
     public void eliminarSala(int ID){
         biblioteca.eliminarSala(ID);
     }
+    
+    public void prestarsala(Usuario usuario,SalaEstudio salaEstudio){
+        biblioteca.PrestarSala(usuario,salaEstudio);
+    }
+    
+    public void devolversala(Usuario usuario,SalaEstudio salaEstudio){
+        biblioteca.DevolverSala(usuario,salaEstudio);
+    }
+    
 }
