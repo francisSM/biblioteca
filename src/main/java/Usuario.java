@@ -65,4 +65,8 @@ public class Usuario {
                 ", calificaciones=" + calificaciones +
                 '}';
     }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }
